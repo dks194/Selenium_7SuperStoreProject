@@ -1,0 +1,24 @@
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">-->
+<suite name="Suite">
+
+	<test name="GroupingTest">
+		<parameter name="Browser" value="Chrome"></parameter>
+		<groups>
+			<run>
+				<include name="Launch"></include><!--BeforeMethod-->
+				<include name="Group1"></include>
+				<include name="End"></include><!--after method-->
+				<!--<exclude name = "groupName"/> to exclude testcases-->
+			</run>
+
+		</groups>
+		<classes>
+
+			<class name="testClasses.LoginPageTestClass" />
+
+		</classes>
+	</test> <!--
+	Test -->
+</suite> <!--
+Suite -->

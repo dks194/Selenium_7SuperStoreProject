@@ -16,7 +16,7 @@ public class CategoryPageTestClass extends BaseClass {
 	DashboardPage dash;
 	CategoryPage categoryPage;
 	
-	 @Test(dataProviderClass = DataProviderClass.class,dataProvider = "successfulLogIn")
+	 @Test(dataProviderClass = DataProviderClass.class,dataProvider = "successfulLogIn",groups={"Group1"})
 	 
  
 	 public void verifyTheAddCategoryFunctionality(String uName,String pW) {

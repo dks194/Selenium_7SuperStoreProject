@@ -7,12 +7,14 @@ import base.BaseClass;
 import dataProviders.DataProviderClass;
 import elementRepository.DashboardPage;
 import elementRepository.LoginPage;
+import retry.RetryAnalyzer;
 
 public class LoginPageTestClass extends BaseClass {
 	
 	LoginPage lp;
 	DashboardPage dash; 
-	@Test
+	
+	@Test(retryAnalyzer = RetryAnalyzer.class)
 	public void verifyTheExactPageIsOpenWhileHittingThe_URL() {
 
 		LoginPage lp = new LoginPage(driver);
@@ -22,13 +24,15 @@ public class LoginPageTestClass extends BaseClass {
 		 * Assert.assertEquals(actual_Title, "Login | 7rmart supermarket");
 		 */
 
+		 
+		
 		String actual_Title = lp.getTextOf7martHeading();
 		Assert.assertEquals(actual_Title, "7rmart supermarket");
 		System.out.println("Title of the page : " + actual_Title);
 
 	}
 	
-	@Test
+	@Test(groups="Group1",retryAnalyzer = RetryAnalyzer.class)
 	public void verifySuccessfulLoginPage() {
 		lp=new LoginPage(driver);
 		dash=lp.login("admin", "admin");
@@ -38,7 +42,7 @@ public class LoginPageTestClass extends BaseClass {
 		
 	}
 	
-	@Test(dataProviderClass = DataProviderClass.class,dataProvider = "unsuccessfulLogin")
+	@Test(dataProviderClass = DataProviderClass.class,dataProvider = "unsuccessfulLogin",groups="Group1")
 	public void verifyUnsuccessfulLogin(String userN,String passwrd) {
 		lp=new LoginPage(driver);
 		lp.login(userN, passwrd);
@@ -46,7 +50,7 @@ public class LoginPageTestClass extends BaseClass {
 		Assert.assertTrue(actualResult.contains("Invalid Username/Password"));
 	}
 	
-	@Test
+	@Test(retryAnalyzer = RetryAnalyzer.class)
 	public void verifyRememberMeCheckboxIsCheckedOrNotByDefault() {
 		lp=new LoginPage(driver);
 		boolean actual_Result = lp.isRememberMeCheckboxSelected();
